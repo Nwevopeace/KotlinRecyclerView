@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.add_contact_dialog, null)
         builder.setView(view)
 
-        val name = view.findViewById<TextInputEditText>(R.id.nameEt)
-        val no = view.findViewById<TextInputEditText>(R.id.numberEt)
-        val saveBtn = view.findViewById<Button>(R.id.saveBt)
+        val name = view.findViewById<TextInputEditText>(R.id.etName)
+        val no = view.findViewById<TextInputEditText>(R.id.etNumber)
+        val saveBtn = view.findViewById<Button>(R.id.saveButton)
 
         no.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
