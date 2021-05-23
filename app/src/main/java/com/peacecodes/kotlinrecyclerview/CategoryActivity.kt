@@ -19,14 +19,11 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun setupCategory(binding: ActivityCategoryBinding) {
         val categories = listOf(
-            Category("FA", "Family"),
-            Category("BZ", "Business"),
-            Category("FD", "Friends"),
-            Category("CS", "Colleagues"),
-            Category("TS", "Tutors"),
-            Category("PE", "Private"),
-            Category("PS", "Partners"),
-                Category("NS", "Neighbours")
+                Category("FA", "Family"),
+                Category("BS", "Business"),
+                Category("FS", "Friends"),
+                Category("CS", "Colleagues"),
+                Category("TS", "Tutors")
         )
         val adapter = CategoryAdapter(categories)
         binding.categoryRv.adapter = adapter

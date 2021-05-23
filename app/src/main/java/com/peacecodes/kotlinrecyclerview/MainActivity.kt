@@ -9,9 +9,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.textfield.TextInputEditText
 import com.peacecodes.kotlinrecyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private val adapter: ContactAdapter = ContactAdapter()
 
@@ -24,38 +26,37 @@ class MainActivity : AppCompatActivity() {
         setUpData(binding)
     }
 
-    fun setUpData(binding: ActivityMainBinding){
+    private fun setUpData(binding: ActivityMainBinding) {
         binding.contactRv.adapter = adapter
         binding.contactRv.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         val builder = AlertDialog.Builder(this)
         val view = layoutInflater.inflate(R.layout.add_contact_dialog, null)
         builder.setView(view)
 
-        val name = view.findViewById<TextView>(R.id.etName)
-        val no = view.findViewById<TextView>(R.id.etNumber)
-        val saveBtn = view.findViewById<Button>(R.id.saveButton)
-        no.addTextChangedListener(object:TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        val name = view.findViewById<TextInputEditText>(R.id.nameEt)
+        val no = view.findViewById<TextInputEditText>(R.id.numberEt)
+        val saveBtn = view.findViewById<Button>(R.id.saveBt)
 
+        no.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                saveBtn.isEnabled = p0?.length == 11
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                   saveBtn.isEnabled = s?.length == 11
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+            override fun afterTextChanged(p0: Editable?) { }
         })
 
         val alertDialog = builder.create()
-        saveBtn.setOnClickListener{
+
+        saveBtn.setOnClickListener {
             val contact = Contact(name.text.toString(), no.text.toString())
             val contacts = mutableListOf(contact)
-            adapter.setUpContacts(contacts)
+            adapter.setupContacts(contacts)
             alertDialog.dismiss()
         }
-        binding.fab.setOnClickListener{
+
+        binding.fab.setOnClickListener {
             alertDialog.show()
         }
     }
